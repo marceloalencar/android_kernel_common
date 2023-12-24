@@ -83,6 +83,10 @@ void __init gic_dist_config(void __iomem *base, int gic_irqs,
 	for (i = 32; i < gic_irqs; i += 4)
 		writel_relaxed(GICD_INT_DEF_PRI_X4, base + GIC_DIST_PRI + i);
 
+#ifdef CONFIG_EOF_FC_WORKAROUND
+	writel_relaxed(0xa0a090a0, base + GIC_DIST_PRI + 0x48);
+#endif
+
 	/*
 	 * Disable all interrupts.  Leave the PPI and SGIs alone
 	 * as they are enabled by redistributor registers.
