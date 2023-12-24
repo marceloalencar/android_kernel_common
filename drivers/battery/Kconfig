@@ -1,0 +1,60 @@
+
+config BATTERY_SAMSUNG
+	tristate "samsung battery driver"
+	help
+	 Say Y to include support for samsung battery driver
+	 This battery driver integrated all battery-related functions
+	 To see battery-related functions,
+	 refer to sec_charging_common.h
+
+config SAMSUNG_LPM_MODE
+	bool "Off charging mode support in sec battery driver"
+	default n
+	help
+	 Say Y to include support for sec off charging support
+	 This value defiend at bootloader.
+	 Before enable this feature,
+	 implement power off charging in the bootloader.
+
+# Fuel Gauge
+
+config FUELGAUGE_MFD
+	tristate "use mfd driver for fuelgauge driver"
+	default n
+	depends on BATTERY_SAMSUNG
+	help
+	 Say Y to include support
+	 for fuelgauge driver with mfd.
+	 This driver source code implemented
+	 fuelgauge driver with mfd.
+
+config FUELGAUGE_88PM822
+	tristate "Marvell 88PM822 fuel gauge driver"
+	depends on MFD_88PM822
+	help
+	  Say Y here to enable battery monitor for Marvell 88PM822 chip.
+	  This driver uses the ADC function of 88PM822. The capacity of the
+	  battery is calculated via the voltage
+	  
+# Charger
+
+config CHARGER_MFD
+	tristate "use mfd driver for charger driver"
+	default n
+	depends on BATTERY_SAMSUNG
+	help
+	 Say Y to include support
+	 for charger driver with mfd.
+	 This driver source code implemented
+	 charger driver with mfd.
+
+config CHARGER_SMB328
+	tristate "SMB328 charger driver"
+	default n
+	depends on BATTERY_SAMSUNG
+	help
+	 Say Y to include support
+	 for Summit SMB328 charger driver.
+	 This driver source code implemented
+	 all functions for SMB328 charger.
+
