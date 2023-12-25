@@ -12,4 +12,10 @@ config SWITCH_GPIO
 	help
 	  Say Y here to enable GPIO based switch support.
 
+config SAMSUNG_JACK
+	bool "3.5MM ear jack KSND driver for Samsung devices on Marvell PXA986"
+	depends on GPIOLIB && MFD_88PM822
+	help
+	  Say Y here to enable headset & hook switch support.
+
 endif # SWITCH
