@@ -31,6 +31,7 @@ static const struct platform_device_id pwm_id_table[] = {
 	{ "pxa27x-pwm", HAS_SECONDARY_PWM },
 	{ "pxa168-pwm", 0 },
 	{ "pxa910-pwm", 0 },
+	{ "mmp2-pwm",   0 },
 	{ },
 };
 MODULE_DEVICE_TABLE(platform, pwm_id_table);
@@ -96,7 +97,7 @@ static int pxa_pwm_config(struct pwm_chip *chip, struct pwm_device *pwm,
 	if (rc < 0)
 		return rc;
 
-	writel(prescale, pc->mmio_base + offset + PWMCR);
+	writel(prescale | PWMCR_SD, pc->mmio_base + offset + PWMCR);
 	writel(dc, pc->mmio_base + offset + PWMDCR);
 	writel(pv, pc->mmio_base + offset + PWMPCR);
 
